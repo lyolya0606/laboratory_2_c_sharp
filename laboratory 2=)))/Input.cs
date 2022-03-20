@@ -35,9 +35,11 @@ namespace laboratory_2 {
             int numberOfSymbols = rand.Next(LEFT_BOARD_OF_SIZE, RIGHT_BOARD_OF_SIZE);
 
             for (int i = 0; i < numberOfSymbols; i++) {
-                i = rand.Next(LEFT_BOARD, RIGHT_BOARD);
-                str += (char)i;
+                str += (char)rand.Next(LEFT_BOARD, RIGHT_BOARD);
             }
+
+            Console.Write($"Random input: {str}");
+            Console.WriteLine();
 
             return str;
         }
@@ -65,6 +67,9 @@ namespace laboratory_2 {
                 }
 
             } while (!check.StringIsCorrect(str) || str.Length == EMPTY_STRING);
+
+            Console.Write($"File input: {str}");
+            Console.WriteLine();
 
             return str;
         }

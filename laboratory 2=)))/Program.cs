@@ -10,12 +10,14 @@ namespace laboratory_2 {
         public static void Main(string[] args) {
             Menu menu = new Menu();
             Check check = new Check();
+            WorkingWithCriphers workingWithCriphers = new WorkingWithCriphers();
             menu.Greeting();
             int userChoice;
 
             do {
 
                 do {
+                    workingWithCriphers.CripherChoosing();
                     Console.WriteLine("Press 1 to finish");
                     Console.WriteLine("Press 2 to continue");
                     userChoice = check.GetInt();
