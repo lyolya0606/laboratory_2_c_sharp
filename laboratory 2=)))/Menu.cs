@@ -4,9 +4,9 @@ namespace laboratory_2 {
     class Menu {
         public void Greeting() {
             Console.WriteLine("Laboratory work 2, variant 1");
-            Console.WriteLine("заданиееееее");
+            Console.WriteLine("Implement the work of encryption and decryption");
+            Console.WriteLine("of the Caesar cipher and the AES cipher");
             Console.WriteLine("Student of group number 403, Bezdudnaya Olga. 2022 year");
-            Console.WriteLine();
         }
 
         public void MenuForSelectionCipher() {
@@ -16,6 +16,7 @@ namespace laboratory_2 {
         }
 
         public void MenuForSelectionCipherWork() {
+            Console.WriteLine();
             Console.WriteLine("Press 1 for encoding");
             Console.WriteLine("Press 2 for decoding");
         }

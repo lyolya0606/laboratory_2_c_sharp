@@ -18,6 +18,7 @@ namespace laboratory_2 {
 
                 do {
                     workingWithCriphers.CripherChoosing();
+                    Console.WriteLine();
                     Console.WriteLine("Press 1 to finish");
                     Console.WriteLine("Press 2 to continue");
                     userChoice = check.GetInt();

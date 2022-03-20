@@ -6,6 +6,8 @@ namespace laboratory_2 {
         private const int FILE_HAS_DATA = 0;
         private const int OVERWRITE_FILE = 1;
         private const int OVERWRITE_PATH = 2;
+        private const int FIRST_SYMBOL = 0;
+        private const int LAST_SYMBOL = 256;
         public int GetInt() {
             int num;
 
@@ -25,7 +27,7 @@ namespace laboratory_2 {
             bool stringIsCorrect = true; 
 
             foreach(int c in str) {
-                if (c < 0 || c > 255) {
+                if (c < FIRST_SYMBOL || c > LAST_SYMBOL) {
                     stringIsCorrect = false;
                 }
             }
