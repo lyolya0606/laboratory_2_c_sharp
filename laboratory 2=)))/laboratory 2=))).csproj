@@ -52,7 +52,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SavingFiles.cs" />
-    <Compile Include="WorkingWithCriphes.cs" />
+    <Compile Include="WorkingWithCiphes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

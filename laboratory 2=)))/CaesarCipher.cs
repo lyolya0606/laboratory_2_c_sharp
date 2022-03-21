@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace laboratory_2 {
+﻿namespace laboratory_2 {
     public class CaesarCipher : ICipher {
         private const int FIRST_SYMBOL = 0;
         private const int LAST_SYMBOL = 256;

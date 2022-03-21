@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace laboratory_2 {
-    class WorkingWithCriphers {
+    class WorkingWithCiphers {
         enum ChoiceOfCipher {
             CAESAR = 1,
             AES
@@ -26,7 +26,7 @@ namespace laboratory_2 {
             Console.WriteLine();
         }
 
-        public void CripherChoosing() {
+        public void CipherChoosing() {
             Menu menu = new Menu();
             Check check = new Check();
             int userChoice;

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace laboratory_2 {
     public class AES : ICipher {
@@ -197,6 +196,8 @@ namespace laboratory_2 {
             0xc6, 0x97, 0x35, 0x6a, 0xd4, 0xb3, 0x7d, 0xfa, 0xef, 0xc5, 0x91, 0x39, 0x72, 0xe4, 0xd3, 0xbd,
             0x61, 0xc2, 0x9f, 0x25, 0x4a, 0x94, 0x33, 0x66, 0xcc, 0x83, 0x1d, 0x3a, 0x74, 0xe8, 0xcb, 0x8d };
 
+        // сдвигает байты на один влево, каждый байт меняет на соответствующий ему из sBox
+        // в зависимости от итерации меняет первый байт на соответствующий из rCon
         private void KeyExpansionCore(byte[] byteIn, byte i) {
             byte t = byteIn[0];
             byteIn[0] = byteIn[1];
@@ -212,6 +213,7 @@ namespace laboratory_2 {
             byteIn[0] ^= rCon[i];
         }
 
+        // генерирует ключ из 176 и заполняет (на основе существующего ключа)
         private void KeyExpansion(byte[] inputKey, byte[] expandedKeys) {
             for (int i = 0; i < NUMBER_OF_ELEMENTS_IN_THE_STATE; i++) {
                 expandedKeys[i] = inputKey[i];
@@ -238,6 +240,7 @@ namespace laboratory_2 {
             }
         }
 
+        // меняет каждый байт на соотвествующий ему из таблицы sBox
         private void SubBytes(byte[] state) {
             for (int i = 0; i < NUMBER_OF_ELEMENTS_IN_THE_STATE; i++) {
                 state[i] = sBox[state[i]];
@@ -250,6 +253,8 @@ namespace laboratory_2 {
             }
         }
 
+        // сдвигает матрицу 4х4: первая строка такая же, вторая сдвигается на 1 байт влево
+        // третья - на два байта влево, четвертая - на три        
         private void ShiftRows(byte[] state) {
             byte[] tmp = new byte[NUMBER_OF_ELEMENTS_IN_THE_STATE];
             tmp[0] = state[0];
@@ -304,6 +309,7 @@ namespace laboratory_2 {
             }
         }
 
+        // меняет каждый байт умножением матриц (используются mul)
         private void MixColumns(byte[] state) {
             byte[] tmp = new byte[NUMBER_OF_ELEMENTS_IN_THE_STATE];
 
@@ -360,6 +366,7 @@ namespace laboratory_2 {
             }
         }
 
+        // каждый байт сообщения и ключа складывается по модулю 2
         private void AddRoundKey(byte[] state, byte[] roundKey) {
             for (int i = 0; i < NUMBER_OF_ELEMENTS_IN_THE_STATE; i++) {
                 state[i] ^= roundKey[i];
@@ -419,10 +426,7 @@ namespace laboratory_2 {
 
             InvShiftRows(state);
             InvSubBytes(state);
-
-
             AddRoundKey(state, key);
-
 
             for (int i = 0; i < NUMBER_OF_ELEMENTS_IN_THE_STATE; i++) {
                 message[i] = state[i];
@@ -451,9 +455,9 @@ namespace laboratory_2 {
 
             List<byte[]> paddedMessage = new List<byte[]>();
             for (int i = 0; i < lenOfPaddedMessage; i += NUMBER_OF_ELEMENTS_IN_THE_STATE) {
-                byte[] xxx = new byte[NUMBER_OF_ELEMENTS_IN_THE_STATE];
-                Array.Copy(messageCopy, i, xxx, 0, NUMBER_OF_ELEMENTS_IN_THE_STATE);
-                paddedMessage.Add(xxx);
+                byte[] tmp = new byte[NUMBER_OF_ELEMENTS_IN_THE_STATE];
+                Array.Copy(messageCopy, i, tmp, 0, NUMBER_OF_ELEMENTS_IN_THE_STATE);
+                paddedMessage.Add(tmp);
             }
 
             return paddedMessage;
@@ -468,9 +472,7 @@ namespace laboratory_2 {
             for (int i = str.Length; i < NUMBER_OF_ELEMENTS_IN_THE_STATE; i++) {
                 key[i] = 0;
             }
-
             return key;
         }
-
     }
 }
