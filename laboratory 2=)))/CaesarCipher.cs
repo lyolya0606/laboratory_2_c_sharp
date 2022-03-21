@@ -37,7 +37,7 @@ namespace laboratory_2 {
                 encodedSymbol = message[i] + keyInt;
 
                 if (encodedSymbol < LAST_SYMBOL) {
-                    result[i] = (byte)encodedSymbol;
+                    result[i] = (byte) encodedSymbol;
                 } else {
                     result[i] = (byte)(encodedSymbol - LAST_SYMBOL);
                 }

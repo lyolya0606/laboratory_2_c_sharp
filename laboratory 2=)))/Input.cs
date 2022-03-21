@@ -61,8 +61,8 @@ namespace laboratory_2 {
                     fileText = line;
                     str = line.Split(' ');
                     break;
-
                 }
+                //fileWriter.Close();
                 byte[] strInt = new byte[str.Length];
 
                 try {
@@ -170,7 +170,6 @@ namespace laboratory_2 {
 
         public string FileInputAES() {
             Check check = new Check();
-            string strLine = "";
             string fileText = "";
 
             do {
@@ -178,25 +177,22 @@ namespace laboratory_2 {
                 foreach (string line in File.ReadLines($"{path}.txt")) {
                     fileText = line;
                     break;
-
                 }
 
-
-                if (!check.StringIsCorrect(strLine)) {
+                if (!check.StringIsCorrect(fileText)) {
                     Console.WriteLine("There are invalid symbols in the string. Try again");
                 }
 
-                if (strLine.Length == EMPTY_STRING) {
+                if (fileText.Length == EMPTY_STRING) {
                     Console.WriteLine("File is empty. Try again");
                 }
 
-            } while (!check.StringIsCorrect(strLine) || strLine.Length == EMPTY_STRING);
+            } while (!check.StringIsCorrect(fileText) || fileText.Length == EMPTY_STRING);
 
             Console.Write($"File: {fileText}");
             Console.WriteLine();
             return fileText;
-        }
-                
+        }                
     }
 }
 

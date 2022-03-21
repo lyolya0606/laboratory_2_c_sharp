@@ -18,11 +18,20 @@ namespace laboratory_2 {
             FILE_INPUT
         }
 
+        private void PrintHex(byte[] message) {
+            Console.WriteLine("String in ASCII hex symbols:");
+            for (int i = 0; i < message.Length; i++) {
+                Console.Write(message[i].ToString("x") + " ");               
+            }
+            Console.WriteLine();
+        }
+
         public void CripherChoosing() {
             Menu menu = new Menu();
             Check check = new Check();
             int userChoice;
             bool stop;
+
 
             do {
                 menu.MenuForSelectionCipher();
@@ -58,7 +67,7 @@ namespace laboratory_2 {
             int userChoice;
             bool stop;
             string keyCaesar;
-            byte[] result = null;
+            byte[] result;
             string keyAES;
 
             do {
@@ -68,46 +77,41 @@ namespace laboratory_2 {
                 switch (userChoice) {
                     case (int)ChoiceOfCode.ENCODE:
                         Console.WriteLine("Your choice is encoding");
-                        byte[] xxx = InputChoosing();
-                        savingFiles.SavingInput(xxx);
+                        byte[] messageForEncode = InputChoosing();
+                        savingFiles.SavingInput(messageForEncode);
 
                         if (typeOfCipher == (int)ChoiceOfCipher.CAESAR) {
                             keyCaesar = ChoosingKeyCaesar();
                             savingFiles.SavingTheKey(keyCaesar);
-                            result = cipher.Encode(xxx, keyCaesar);
+                            result = cipher.Encode(messageForEncode, keyCaesar);
                         } else {
                             keyAES = ChoosingKeyAES();
                             savingFiles.SavingTheKey(keyAES);
-                            result = cipher.Encode(xxx, keyAES);
+                            result = cipher.Encode(messageForEncode, keyAES);
 
                         }
                         Console.WriteLine();
                         Console.WriteLine("The result of encoding:");
-                        for (int i = 0; i < result.Length; i++) {
-                            Console.Write(result[i] + " ");
-                        }
+                        PrintHex(result);
                         savingFiles.SavingTheResult(result);
                         stop = true;
                         break;
                     case (int)ChoiceOfCode.DECODE:
                         Console.WriteLine("Your choice is decoding");
-                        byte[] yyy = InputChoosing();
+                        byte[] messageForDecode = InputChoosing();
 
                         if (typeOfCipher == (int)ChoiceOfCipher.CAESAR) {
                             keyCaesar = ChoosingKeyCaesar();
                             savingFiles.SavingTheKey(keyCaesar);
-                            result = cipher.Decode(yyy, keyCaesar);
+                            result = cipher.Decode(messageForDecode, keyCaesar);
                         } else {
                             keyAES = ChoosingKeyAES();
                             savingFiles.SavingTheKey(keyAES);
-                            result = cipher.Decode(yyy, keyAES);
+                            result = cipher.Decode(messageForDecode, keyAES);
                         }
                         Console.WriteLine();
-                        Console.WriteLine("The result of encoding:");
-                        for (int i = 0; i < result.Length; i++) {
-                            Console.Write(result[i] + " ");
-                        }
-
+                        Console.WriteLine("The result of decoding:");
+                        PrintHex(result);
                         stop = true;
                         break;
                     default:
@@ -136,24 +140,17 @@ namespace laboratory_2 {
                 switch (userChoice) {
                     case (int)ChoiceOfInput.KEYBOARD_INPUT:
                         message = input.KeyboardInput();
-                        Console.WriteLine("Input in ASCII symbols:");
-                        for (int i = 0; i < message.Length; i++) {
-                            Console.Write(message[i] + " ");
-                        }
-                        Console.WriteLine();
+                        PrintHex(message);
                         stop = true;
                         break;
                     case (int)ChoiceOfInput.RANDOM_INPUT:
                         message = input.RandomInput();
-                        Console.WriteLine("Input in ASCII symbols:");
-                        for (int i = 0; i < message.Length; i++) {
-                            Console.Write(message[i] + " ");
-                        }
-                        Console.WriteLine();
+                        PrintHex(message);
                         stop = true;
                         break;
                     case (int)ChoiceOfInput.FILE_INPUT:
                         message = input.FileInput();
+                        PrintHex(message);
                         stop = true;
                         break;
                     default:
