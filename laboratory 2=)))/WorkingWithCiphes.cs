@@ -111,6 +111,7 @@ namespace laboratory_2 {
                         }
                         Console.WriteLine();
                         Console.WriteLine("The result of decoding:");
+                        savingFiles.SavingTheResult(result);
                         PrintHex(result);
                         stop = true;
                         break;
